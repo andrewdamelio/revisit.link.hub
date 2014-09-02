@@ -44,6 +44,16 @@ function checkValid() {
 
 body.on('change', '#photo-picker', function () {
   $('#preview').css('display', 'block');
+
+  var filetype = $('#preview img').attr('src');
+
+  if (filetype == undefined) {
+    window.setTimeout(function() {
+      filetype = $('#preview img').attr('src').match(/image\/jpg|jpeg|gif|png/);
+      $('.online[data-supports~="'+ filetype +'"]').css({'background-color' : '#c0feca'});
+    }, 2000);
+  }
+
   fileAdded = true;
   checkValid();
 });
@@ -77,9 +87,15 @@ $.get('/services', function (data) {
   data.services.forEach(function (d) {
     var li = $('<li class="service-list-item"></li>');
     var preview = $('<div class="image-preview"><img /></div>');
+    var small = $('<small>' + d.supports.join(', ') + '</small>');
     var title = $('<h4 />');
 
-    li.data({ title: d.description, url: d.url });
+    li.attr({
+      'data-title': d.description,
+      'data-url': d.url,
+      'data-supports': d.supports.join(' ')
+    });
+
     preview.find('img').attr('src', d.sample);
     title.text(d.description);
 
@@ -87,7 +103,8 @@ $.get('/services', function (data) {
       li.addClass('online');
     }
 
-    li.append(preview, title);
+    li.append(preview, title, small);
+
     serviceList.append(li);
   });
 });
