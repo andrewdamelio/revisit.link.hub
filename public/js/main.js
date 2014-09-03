@@ -44,13 +44,14 @@ function checkValid() {
 
 body.on('change', '#photo-picker', function () {
   $('#preview').css('display', 'block');
+  $('.online.supports').removeClass('supports');
 
   var filetype = $('#preview img').attr('src');
 
   if (filetype == undefined) {
     window.setTimeout(function() {
       filetype = $('#preview img').attr('src').match(/image\/jpg|jpeg|gif|png/);
-      $('.online[data-supports~="'+ filetype +'"]').toggleClass('supports');
+      $('.online[data-supports~="'+ filetype +'"]').addClass('supports');
     }, 2000);
   }
 
