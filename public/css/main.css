@@ -580,6 +580,10 @@ section.step.no-icon::after {
   background-color: #88fbdc;
 }
 
+.service-list-item.online.supports {
+  background-color: #c0feca;
+}
+
 .service-list-item.online .image-preview,
 .service-list-item.online h4,
 .service-list-item.online .description {

@@ -50,7 +50,7 @@ body.on('change', '#photo-picker', function () {
   if (filetype == undefined) {
     window.setTimeout(function() {
       filetype = $('#preview img').attr('src').match(/image\/jpg|jpeg|gif|png/);
-      $('.online[data-supports~="'+ filetype +'"]').css({'background-color' : '#c0feca'});
+      $('.online[data-supports~="'+ filetype +'"]').toggleClass('supports');
     }, 2000);
   }
 
